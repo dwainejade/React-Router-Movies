@@ -1,10 +1,14 @@
 import React from 'react';
+import Link from 'react-dom'
 
 const MovieList = props => {
   return (
     <div className="movie-list">
       {props.movies.map(movie => (
+        <div className="movie-card" key={movie.id}>
         <MovieDetails key={movie.id} movie={movie} />
+
+        </div>
       ))}
     </div>
   );
