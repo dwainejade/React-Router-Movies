@@ -1,14 +1,29 @@
-import React from 'react';
-import Link from 'react-dom'
+import React, { useState, useEffect} from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 const MovieList = props => {
+const [movie, setMovie] = useState([])
+  useEffect(() => {
+    const getMovies = () => {
+      axios
+        .get('http://localhost:5000/api/movies')
+        .then(response => {
+          setMovie(response.data);
+        })
+        .catch(error => {
+          console.error('Server Error', error);
+        });
+    }
+    getMovies();
+  }, []);
+
+
   return (
     <div className="movie-list">
-      {props.movies.map(movie => (
-        <div className="movie-card" key={movie.id}>
+      {movie.map(movie => (
         <MovieDetails key={movie.id} movie={movie} />
-
-        </div>
       ))}
     </div>
   );
@@ -17,6 +32,7 @@ const MovieList = props => {
 function MovieDetails({ movie }) {
   const { title, director, metascore, stars } = movie;
   return (
+    <Link to={`/Movie/${movie.id}`}>
     <div className="movie-card">
       <h2>{title}</h2>
       <div className="movie-director">
@@ -33,6 +49,8 @@ function MovieDetails({ movie }) {
         </div>
       ))}
     </div>
+    </Link>
+    
   );
 }
 
