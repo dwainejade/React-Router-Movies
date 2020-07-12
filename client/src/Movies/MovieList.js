@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-
 const MovieList = props => {
   const [movie, setMovie] = useState([])
   useEffect(() => {

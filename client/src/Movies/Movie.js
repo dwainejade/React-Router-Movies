@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 const Movie = (props) => {
   const [movie, setMovie] = useState();
   const {id} = useParams();
-
+  
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
